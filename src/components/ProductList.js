@@ -24,10 +24,12 @@ const ProductList = ({ msg, setMsg }) => {
     const navigate = useNavigate()
 
     useEffect(() => {
+        refreshToken(setToken, setName, setExpire, navigate)
+    }, [])
+    useEffect(() => {
         getChainList()
         getScriptList()
         getActionListByChainId(currentChain)
-        refreshToken(setToken, setName, setExpire, navigate)
     }, [currentChain])
 
 
@@ -118,7 +120,7 @@ const ProductList = ({ msg, setMsg }) => {
                     <Link to='/users' className="btn btn-primary mb-2 me-2">User List</Link>
                     <Link to='/add' className="btn btn-primary mb-2 me-2">Add New Action</Link>
                     <button onClick={deleteMulti} className="btn btn-danger mb-2">Delete</button>
-                    <h5 className='justify-content-center mt-2'>Available Actions for {chain_list[currentChain-1]?.chain_name}</h5>
+                    <h5 className='justify-content-center mt-2'>Available Actions for {chain_list[currentChain - 1]?.chain_name}</h5>
                     <form onSubmit={updateProduct} style={{ overflow: 'auto', maxHeight: '400px' }} >
                         <table className="table table-striped table-bordered text-center mt-3 table-responsive">
                             <thead>
@@ -172,7 +174,7 @@ const ProductList = ({ msg, setMsg }) => {
                     </form>
                 </div>
             </div>
-            <BridgeList msg={msg} setMsg={setMsg} current_chain={currentChain}/>
+            <BridgeList msg={msg} setMsg={setMsg} current_chain={currentChain} />
         </div>
     )
 }
