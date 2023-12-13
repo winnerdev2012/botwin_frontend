@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import DataTable from 'react-data-table-component';
 import React, { useEffect, useState } from 'react'
 import Navigation from './Navigation'
-import { refreshToken, useLocalStorage } from './utils'
+import { refreshToken, useLocalStorage } from '../utils'
 import { Link, useNavigate } from 'react-router-dom'
 import jwt_decode from 'jwt-decode'
 const Users = ({ }) => {
@@ -53,7 +53,7 @@ const Users = ({ }) => {
     axiosJWT.interceptors.request.use(async (config) => {
         const currentDate = new Date()
         if (expire * 1000 < currentDate.getTime()) {
-            const response = await axios.get('https://botwin-admin-backend.onrender.com/token')
+            const response = await axios.get('http://localhost:5000/token')
             config.headers.Authorization = `Bearer ${response.data.accessToken}`
             setToken(response.data.accessToken)
             const decoded = jwt_decode(response.data.accessToken)
@@ -64,7 +64,7 @@ const Users = ({ }) => {
     }, (error) => Promise.reject(error))
 
     const getUsers = async () => {
-        const response = await axiosJWT.get('https://botwin-admin-backend.onrender.com/getUser', {
+        const response = await axiosJWT.get('http://localhost:5000/getUser', {
             headers: {
                 Authorization: `Bearer ${token}`
             }

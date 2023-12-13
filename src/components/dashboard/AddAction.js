@@ -9,6 +9,7 @@ const AddProduct = ({ setMsg }) => {
     const [action_type_int, setAction_type_int] = useState(0)
     const [chain_list, setChain_list] = useState([])
     const [currentChain, setCurretChain] = useState(1)
+    const [formError, setFormError] = useState('');
 
     const navigate = useNavigate()
 
@@ -17,13 +18,19 @@ const AddProduct = ({ setMsg }) => {
     }, [])
 
     const getChainList = async () => {
-        const response = await axios.get('https://botwin-admin-backend.onrender.com/get_chain_list')
+        const response = await axios.get('http://localhost:5000/get_chain_list')
         setChain_list(response.data)
         setTimeout(() => setMsg(''), 7500)
     }
 
     const saveProduct = async (e) => {
         e.preventDefault()
+
+        if (!actionName || !actionUrl || !currentChain || !actionWeight) {
+            alert('Please fill in all fields');
+            return;
+        }
+
         const substring = actionName.split("_")[0]
         if (substring === "TRADE") {
             setAction_type_int(1);
@@ -34,7 +41,7 @@ const AddProduct = ({ setMsg }) => {
         } else {
             setAction_type_int(0);
         }
-        const response = await axios.post('https://botwin-admin-backend.onrender.com/add_action_item', {
+        const response = await axios.post('http://localhost:5000/add_action_item', {
             action_name: actionName,
             action_type: action_type_int,
             action_url: actionUrl,
@@ -44,9 +51,10 @@ const AddProduct = ({ setMsg }) => {
         setMsg(response.data.message)
         navigate("/products")
     }
+
     return (
         <div className="container-fluid">
-            <div className="row justify-content-center mt-5" >
+            <div className="row justify-content-center mt-5">
                 <div className="col-5">
                     <div>
                         <form onSubmit={saveProduct}>
@@ -77,9 +85,14 @@ const AddProduct = ({ setMsg }) => {
                             </div>
                             <div className="mb-3">
                                 <label htmlFor="exampleFormControlSelect1" className="form-label">
-                                    Select an Chain
+                                    Select a Chain
                                 </label>
-                                <select className="form-select" id="exampleFormControlSelect1" onChange={(event) => setCurretChain(event.target.value)}>
+                                <select
+                                    className="form-select"
+                                    id="exampleFormControlSelect1"
+                                    value={currentChain}
+                                    onChange={(event) => setCurretChain(event.target.value)}
+                                >
                                     {chain_list.map((chain, index) => (
                                         <option key={index} value={chain.chain_id} className="btn mb-2 me-2 col-10">
                                             {chain.chain_name}
@@ -105,7 +118,7 @@ const AddProduct = ({ setMsg }) => {
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default AddProduct

@@ -24,7 +24,7 @@ export const useLocalStorage = (key, defaultValue) => {
 
 export const refreshToken=async(setToken,setName,setExpire,navigate)=>{
   try {
-      const response=await axios.get('https://botwin-admin-backend.onrender.com/token')
+      const response=await axios.get('http://localhost:5000/token')
       setToken(response.data.accessToken)
       const decoded=jwt_decode(response.data.accessToken)
       setName(decoded.name)

@@ -31,9 +31,17 @@ const ReadOnlyRows = (props) => {
                 {product.action_weight}
             </td>
             <td>
-                {/* <Link to={`/edit/${product.id}`} className="btn btn-info mx-2">Edit</Link> */}
+                <input
+                    type="checkbox"
+                    checked={product.active == 1}
+                    onChange={e => {
+                        const value = e.target.checked ? 1 : 0;
+                        props.setActive(product.action_id, value);
+                    }}
+                />
+            </td>
+            <td>
                 <button className="btn btn-primary mb-2 me-2 col-7" onClick={(e) => props.edit(e, product)}>Edit</button>
-                {/* <button onClick={() => props.delete(product.id)} className="btn btn-danger">Delete</button> */}
             </td>
         </tr>
     )
