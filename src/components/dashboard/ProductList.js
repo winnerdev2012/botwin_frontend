@@ -39,7 +39,7 @@ const ProductList = ({ msg, setMsg }) => {
     
     const updateActiveChain = async (chain_id, isActive) => {
         const newIsActive = isActive == 0 ? 1 : 0;
-        await axios.patch(`http://localhost:5000/set_avtive_chain`, {
+        await axios.patch(`https://botwin-admin-backend.onrender.com/set_avtive_chain`, {
             chain_id: chain_id,
             isActive: newIsActive,
         }).then((response) => console.log(response.statusText))
@@ -48,26 +48,26 @@ const ProductList = ({ msg, setMsg }) => {
 
     const setActiveAction = async (action_id, isActive) => {
         const newIsActive = isActive == 0 ? 0 : 1;
-        await axios.patch(`http://localhost:5000/set_avtive_action`, {
+        await axios.patch(`https://botwin-admin-backend.onrender.com/set_avtive_action`, {
             action_id: action_id,
             isActive: newIsActive,
         }).then((response) => console.log(response))
         getActionListByChainId(currentChain)
     }
     const getActionListByChainId = async (chain_id, script_id) => {
-        const response = await axios.get(`http://localhost:5000/get_action_list/${chain_id}`)
+        const response = await axios.get(`https://botwin-admin-backend.onrender.com/get_action_list/${chain_id}`)
         setProducts(response.data)
         setTimeout(() => setMsg(''), 7500)
     }
     const getChainList = async () => {
-        const response = await axios.get('http://localhost:5000/get_chain_list')
+        const response = await axios.get('https://botwin-admin-backend.onrender.com/get_chain_list')
         setChain_list(response.data)
         console.log(response.data[currentChain - 1].chain_active)
         setActiveChain(response.data[currentChain - 1].chain_active)
         setTimeout(() => setMsg(''), 7500)
     }
     const getScriptList = async () => {
-        const response = await axios.get('http://localhost:5000/get_script_list')
+        const response = await axios.get('https://botwin-admin-backend.onrender.com/get_script_list')
         setScript_list(response.data)
         setTimeout(() => setMsg(''), 7500)
     }
@@ -77,7 +77,7 @@ const ProductList = ({ msg, setMsg }) => {
     }
     const updateProduct = async (e) => {
         e.preventDefault()
-        await axios.patch(`http://localhost:5000/update_action_item/${editProduct}`, {
+        await axios.patch(`https://botwin-admin-backend.onrender.com/update_action_item/${editProduct}`, {
             action_name: actionName,
             action_url: actionUrl,
             action_weight: actionWeight
@@ -97,7 +97,7 @@ const ProductList = ({ msg, setMsg }) => {
             confirmButtonText: 'Yes, delete it!'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await axios.delete('http://localhost:5000/delete_chain/' + currentChain).then((response) => {
+                await axios.delete('https://botwin-admin-backend.onrender.com/delete_chain/' + currentChain).then((response) => {
                     Swal.fire(
                         'Deleted!',
                         response.data.message,
@@ -128,7 +128,7 @@ const ProductList = ({ msg, setMsg }) => {
                     }
                 });
                 console.log(arrayids);
-                await axios.delete('http://localhost:5000/delete_selected_item/' + arrayids).then((response) => {
+                await axios.delete('https://botwin-admin-backend.onrender.com/delete_selected_item/' + arrayids).then((response) => {
                     Swal.fire(
                         'Deleted!',
                         response.data.message,

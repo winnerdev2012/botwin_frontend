@@ -32,17 +32,17 @@ const BridgeList = ({ msg, setMsg, current_chain }) => {
 
 
     const getActionListByChainId = async (id) => {
-        const response = await axios.get(`http://localhost:5000/get_action_list/${id}`)
+        const response = await axios.get(`https://botwin-admin-backend.onrender.com/get_action_list/${id}`)
         setProducts(response.data)
         setTimeout(() => setMsg(''), 7500)
     }
     const getBridgeList = async () => {
-        const response = await axios.get('http://localhost:5000/get_bridge_list')
+        const response = await axios.get('https://botwin-admin-backend.onrender.com/get_bridge_list')
         setBridge_list(response.data)
         setTimeout(() => setMsg(''), 7500)
     }
     const getChainList = async () => {
-        const response = await axios.get('http://localhost:5000/get_chain_list')
+        const response = await axios.get('https://botwin-admin-backend.onrender.com/get_chain_list')
         setChain_list(response.data)
         setTimeout(() => setMsg(''), 7500)
     }
@@ -52,7 +52,7 @@ const BridgeList = ({ msg, setMsg, current_chain }) => {
     }
     const updateProduct = async (e) => {
         e.preventDefault()
-        await axios.patch(`http://localhost:5000/update_action_item/${editProduct}`, {
+        await axios.patch(`https://botwin-admin-backend.onrender.com/update_action_item/${editProduct}`, {
             action_name: actionName,
             action_url: actionUrl,
             action_weight: actionWeight
@@ -79,7 +79,7 @@ const BridgeList = ({ msg, setMsg, current_chain }) => {
                     }
                 });
                 console.log(arrayids);
-                await axios.delete('http://localhost:5000/delete_selected_item/' + arrayids).then((response) => {
+                await axios.delete('https://botwin-admin-backend.onrender.com/delete_selected_item/' + arrayids).then((response) => {
                     Swal.fire(
                         'Deleted!',
                         response.data.message,

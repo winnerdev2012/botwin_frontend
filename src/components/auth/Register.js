@@ -13,7 +13,7 @@ const Register = ({ msg, setMsg }) => {
     const register = async (e) => {
         e.preventDefault()
         try {
-            await axios.post('http://localhost:5000/register', {
+            await axios.post('https://botwin-admin-backend.onrender.com/register', {
                 name: name,
                 email: email,
                 password: password,
