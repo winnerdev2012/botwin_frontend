@@ -18,7 +18,7 @@ const AddProduct = ({ setMsg }) => {
     }, [])
 
     const getChainList = async () => {
-        const response = await axios.get('https://botwin-admin-backend.onrender.com/get_chain_list')
+        const response = await axios.get('http://localhost:5000/get_chain_list')
         setChain_list(response.data)
         setTimeout(() => setMsg(''), 7500)
     }
@@ -41,7 +41,7 @@ const AddProduct = ({ setMsg }) => {
         } else {
             setAction_type_int(0);
         }
-        const response = await axios.post('https://botwin-admin-backend.onrender.com/add_action_item', {
+        const response = await axios.post('http://localhost:5000/add_action_item', {
             action_name: actionName,
             action_type: action_type_int,
             action_url: actionUrl,

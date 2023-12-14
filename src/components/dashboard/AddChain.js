@@ -8,7 +8,7 @@ const AddChain = ({ setMsg }) => {
     const navigate = useNavigate()
     const saveProduct = async (e) => {
         e.preventDefault()
-        const response = await axios.post('https://botwin-admin-backend.onrender.com/add_chain_item', {
+        const response = await axios.post('http://localhost:5000/add_chain_item', {
             chain_name: chain_name,
         })
         setMsg(response.data.message)

@@ -33,10 +33,10 @@ const ReadOnlyRows = (props) => {
             <td>
                 <input
                     type="checkbox"
-                    checked={product.active == 1}
+                    checked={parseInt(product.active?.split(' ')[props.currentScript - 1]) == 1}
                     onChange={e => {
                         const value = e.target.checked ? 1 : 0;
-                        props.setActive(product.action_id, value);
+                        props.setActive(product.action_id, value, props.i);
                     }}
                 />
             </td>

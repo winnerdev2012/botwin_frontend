@@ -5,7 +5,7 @@ import axios from 'axios'
 const EditInline = ({ i, editProduct, id, actionName, setActionName, actionUrl, setActionUrl, actionWeight, setActionWeight }) => {
     useEffect(() => {
         const getProductById = async () => {
-            await axios.get(`https://botwin-admin-backend.onrender.com/get_action_item/${id}`).then((response) => {
+            await axios.get(`http://localhost:5000/get_action_item/${id}`).then((response) => {
                 setActionName(response.data[0].action_name)
                 setActionUrl(response.data[0].action_url)
                 setActionWeight(response.data[0].action_weight)

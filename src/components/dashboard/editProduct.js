@@ -9,7 +9,7 @@ const EditProduct = () => {
     const navigate = useNavigate()
     const updateProduct = async (e) => {
         e.preventDefault()
-        await axios.patch(`https://botwin-admin-backend.onrender.com/products/${id}`, {
+        await axios.patch(`http://localhost:5000/products/${id}`, {
             title: title,
             price: price
         })
@@ -18,7 +18,7 @@ const EditProduct = () => {
 
     useEffect(() => {
         const getProductById = async () => {
-            await axios.get(`https://botwin-admin-backend.onrender.com/products/${id}`).then((response) => {
+            await axios.get(`http://localhost:5000/products/${id}`).then((response) => {
                 setTitle(response.data[0].title)
                 setPrice(response.data[0].price)
             })

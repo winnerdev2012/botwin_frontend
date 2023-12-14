@@ -24,7 +24,7 @@ const Navigation = () => {
             confirmButtonText: 'Yes'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await axios.delete('https://botwin-admin-backend.onrender.com/logout')
+                await axios.delete('http://localhost:5000/logout')
                 navigate('/')
                 localStorage.clear()
             }
