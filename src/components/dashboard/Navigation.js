@@ -24,7 +24,7 @@ const Navigation = () => {
             confirmButtonText: 'Yes'
         }).then(async (result) => {
             if (result.isConfirmed) {
-                await axios.delete('http://localhost:5000/logout')
+                await axios.delete('https://botwin-admin-backend.onrender.com/logout')
                 navigate('/')
                 localStorage.clear()
             }
@@ -37,7 +37,7 @@ const Navigation = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto d-flex align-items-sm-center">
-                        {/* <Link to='/add' style={{ marginRight: '15px' }} className="text-white">Chain Management</Link> */}
+                        <Link to='/managebridge' style={{ marginRight: '15px' }} className="text-white">Bridge Management</Link>
                         <Navbar.Brand style={{ fontSize: '15px', marginTop: '2px' }}>{name}</Navbar.Brand>
                         <Button variant="dark" onClick={logout} className="fa fa-sign-out"> Logout</Button>
                     </Nav>

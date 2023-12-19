@@ -7,6 +7,7 @@ import Register from './components/auth/Register';
 import Login from './components/auth/Login';
 import Users from './components/dashboard/Users';
 import Navigation from './components/dashboard/Navigation'
+import BridgeManagement from './components/dashboard/BridgeManagement'
 
 function App() {
   const [msg, setMsg] = useState('')
@@ -18,6 +19,7 @@ function App() {
         <Route path="/register" element={<Register msg={msg} setMsg={setMsg} />} />
         <Route path="/products" element={<ProductList msg={msg} setMsg={setMsg} />} />
         <Route path="/addaction" element={<AddAction setMsg={setMsg} />} />
+        <Route path="/managebridge" element={<BridgeManagement setMsg={setMsg} />} />
         <Route path="/addchain" element={<AddChain setMsg={setMsg} />} />
         <Route path="/users" element={<Users />} />
       </Routes>

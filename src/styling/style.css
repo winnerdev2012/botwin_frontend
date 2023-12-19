@@ -1,3 +1,15 @@
+body {
+  background-color: #ffffff;
+  color: #333333;
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  background-color: #333333;
+  color: #ffffff;
+}
+
+
 .divider:after,
 .divider:before {
   content: "";
@@ -48,4 +60,8 @@
 
 .table-responsive {
   max-height: 300px;
+}
+.bridge_list{
+  /* margin-top:  200px; */
+  margin-bottom:  200px;
 }
