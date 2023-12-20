@@ -10,7 +10,14 @@ const AddProduct = ({ setMsg }) => {
     const [chain_list, setChain_list] = useState([])
     const [currentChain, setCurretChain] = useState(1)
     const [formError, setFormError] = useState('');
-
+    const [token, setToken] = useState('');
+    const [name, setName] = useLocalStorage('name', '');
+    const [expire, setExpire] = useState('');
+    
+    useEffect(() => {
+        refreshToken(setToken, setName, setExpire, navigate)
+        getChainList()
+    }, [])
     const navigate = useNavigate()
 
     useEffect(() => {

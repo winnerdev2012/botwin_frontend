@@ -4,7 +4,14 @@ import { useNavigate } from 'react-router-dom'
 
 const AddChain = ({ setMsg }) => {
     const [chain_name, setChain_name] = useState('')
-
+    const [token, setToken] = useState('');
+    const [name, setName] = useLocalStorage('name', '');
+    const [expire, setExpire] = useState('');
+    
+    useEffect(() => {
+        refreshToken(setToken, setName, setExpire, navigate)
+        getChainList()
+    }, [])
     const navigate = useNavigate()
     const saveProduct = async (e) => {
         e.preventDefault()
