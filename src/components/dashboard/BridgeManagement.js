@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
 import Swal from 'sweetalert2'
+import { refreshToken, useLocalStorage } from '../utils'
 
 const BridgeManagement = ({ setMsg }) => {
     const [bridgeName, setBridgeName] = useState('')
@@ -14,6 +15,13 @@ const BridgeManagement = ({ setMsg }) => {
     const [currentChain, setCurretChain] = useState(1)
     const [currentBridge, setCurretBridge] = useState(0)
     const [formError, setFormError] = useState('');
+    const [token, setToken] = useState('');
+    const [name, setName] = useLocalStorage('name', '');
+    const [expire, setExpire] = useState('');
+
+    useEffect(() => {
+        refreshToken(setToken, setName, setExpire, navigate)
+    }, [])
 
     const navigate = useNavigate()
 

@@ -27,7 +27,6 @@ const AddChain = ({ setMsg }) => {
                                 <input
                                     type="text"
                                     className="form-control"
-                                    id="exampleInputEmail1"
                                     aria-describedby="text"
                                     value={chain_name}
                                     onChange={(e) => setChain_name(e.target.value)}

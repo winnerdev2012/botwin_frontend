@@ -5,8 +5,8 @@ import { useNavigate } from 'react-router-dom'
 const AddProduct = ({ setMsg }) => {
     const [actionName, setActionName] = useState('')
     const [actionUrl, setActionUrl] = useState('')
-    const [actionWeight, setActionWeight] = useState(0)
-    const [action_type_int, setAction_type_int] = useState(0)
+    const [actionWeight, setActionWeight] = useState(1)
+    const [action_type_int, setAction_type_int] = useState(1)
     const [chain_list, setChain_list] = useState([])
     const [currentChain, setCurretChain] = useState(1)
     const [formError, setFormError] = useState('');
@@ -26,7 +26,7 @@ const AddProduct = ({ setMsg }) => {
     const saveProduct = async (e) => {
         e.preventDefault()
 
-        if (!actionName || !actionUrl || !currentChain || !actionWeight) {
+        if (!actionName || !actionUrl || !currentChain) {
             alert('Please fill in all fields');
             return;
         }

@@ -37,7 +37,8 @@ const Navigation = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto d-flex align-items-sm-center">
-                        <Link to='/managebridge' style={{ marginRight: '15px' }} className="text-white">Bridge Management</Link>
+                        <Link to='/editchain' style={{ marginRight: '15px' }} className="text-white text-decoration-none">Edit Chain</Link>
+                        <Link to='/managebridge' style={{ marginRight: '15px' }} className="text-white text-decoration-none">Bridge Management</Link>
                         <Navbar.Brand style={{ fontSize: '15px', marginTop: '2px' }}>{name}</Navbar.Brand>
                         <Button variant="dark" onClick={logout} className="fa fa-sign-out"> Logout</Button>
                     </Nav>

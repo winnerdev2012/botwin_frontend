@@ -13,19 +13,22 @@ const ProductList = ({ msg, setMsg }) => {
     const [products, setProducts] = useState([]);
     const [editProduct, setEditProduct] = useState(null);
     const [token, setToken] = useState('');
+    const [name, setName] = useLocalStorage('name', '');
+    const [expire, setExpire] = useState('');
     const [actionName, setActionName] = useState('');
     const [actionUrl, setActionUrl] = useState('');
     const [actionWeight, setActionWeight] = useState(0);
-    const [expire, setExpire] = useState('');
-    const [name, setName] = useLocalStorage('name', '');
     const [currentChain, setCurretChain] = useState(1);
+    const [currentChainIndex, setCurrentChainIndex] = useState(1);
     const [currentScript, setCurretcript] = useState(1);
 
     const [activechain, setActiveChain] = useState(1);
     const [oldActivechain, setOldActiveChain] = useState(1);
 
     const [maxCount, setMaxCount] = useState('');
+    const [maxCount2, setMaxCount2] = useState('');
     const [oldMaxCount, setOldMaxCount] = useState(1);
+    const [oldMaxCount2, setOldMaxCount2] = useState(1);
 
     const navigate = useNavigate()
 
@@ -55,13 +58,19 @@ const ProductList = ({ msg, setMsg }) => {
         }
     };
 
+    const handlePress2 = (e) => {
+        if (e.key == "Enter") {
+            updateMaxChainCount(currentChain, maxCount2)
+        }
+    };
+
     const updateActiveChain = async (chain_id, isActive) => {
         const newIsActive = isActive == 0 ? 1 : 0;
 
         const values = oldActivechain.split(' ');
         values[currentScript - 1] = newIsActive.toString();
 
-        await axios.patch(`https://botwin-admin-backend.onrender.com/set_avtive_chain`, {
+        await axios.patch(`https://botwin-admin-backend.onrender.com/update_active_chain`, {
             chain_id: chain_id,
             new_values: values.join(' '),
         }).then((response) => console.log(response.statusText))
@@ -73,9 +82,21 @@ const ProductList = ({ msg, setMsg }) => {
         const values = oldMaxCount.split(' ');
         values[currentScript - 1] = maxCount.toString();
 
-        await axios.patch(`https://botwin-admin-backend.onrender.com/set_max_action_count`, {
+        await axios.patch(`https://botwin-admin-backend.onrender.com/update_max_action_count`, {
             chain_id: chain_id,
             max_action_count: values.join(' '),
+        }).then((response) => console.log(response.statusText))
+        getChainList()
+    }
+
+    const updateMaxChainCount = async (chain_id, maxCount2) => {
+
+        const values = oldMaxCount2.split(' ');
+        values[currentScript - 1] = maxCount2.toString();
+
+        await axios.patch(`https://botwin-admin-backend.onrender.com/update_max_chain_count`, {
+            chain_id: chain_id,
+            max_chain_count: values.join(' '),
         }).then((response) => console.log(response.statusText))
         getChainList()
     }
@@ -86,7 +107,7 @@ const ProductList = ({ msg, setMsg }) => {
         const values = products[index].active.split(' ');
         values[currentScript - 1] = newIsActive.toString();
 
-        await axios.patch(`https://botwin-admin-backend.onrender.com/set_avtive_action`, {
+        await axios.patch(`https://botwin-admin-backend.onrender.com/update_active_action`, {
             action_id: action_id,
             new_values: values.join(' '),
         }).then((response) => console.log(response))
@@ -101,10 +122,12 @@ const ProductList = ({ msg, setMsg }) => {
     const getChainList = async () => {
         const response = await axios.get('https://botwin-admin-backend.onrender.com/get_chain_list')
         setChain_list(response.data)
-        setOldActiveChain(response.data[currentChain - 1]?.chain_active)
-        setActiveChain(parseInt(response.data[currentChain - 1]?.chain_active?.split(' ')[currentScript - 1]))
-        setOldMaxCount(response.data[currentChain - 1]?.max_action_count)
-        setMaxCount(parseInt(response.data[currentChain - 1].max_action_count.split(' ')[currentScript - 1]))
+        setOldActiveChain(response.data[currentChainIndex]?.chain_active)
+        setActiveChain(parseInt(response.data[currentChainIndex]?.chain_active?.split(' ')[currentScript - 1]))
+        setOldMaxCount(response.data[currentChainIndex]?.max_action_count)
+        setMaxCount(parseInt(response.data[currentChainIndex].max_action_count.split(' ')[currentScript - 1]))
+        setOldMaxCount2(response.data[currentChainIndex]?.max_chain_count)
+        setMaxCount2(parseInt(response.data[currentChainIndex].max_chain_count.split(' ')[currentScript - 1]))
         setTimeout(() => setMsg(''), 7500)
     }
     const getScriptList = async () => {
@@ -196,7 +219,7 @@ const ProductList = ({ msg, setMsg }) => {
                 }</h2>
                 <div className="col-2 mt-5">
                     {chain_list.map((chain, index) => (
-                        <button onClick={() => setCurretChain(chain.chain_id)} key={index} className="btn btn-primary mb-2 me-2 col-10">
+                        <button onClick={() => { setCurretChain(chain.chain_id); setCurrentChainIndex(index);}} key={index} className="btn btn-primary mb-2 me-2 col-10">
                             {chain.chain_name}
                         </button>
                     ))}
@@ -215,17 +238,30 @@ const ProductList = ({ msg, setMsg }) => {
                             >
                                 {activechain ? 'Inactive' : 'Active'}
                             </button>
-                            <label htmlFor="exampleInputEmail1" className="form-label me-2">
+                            <label className="form-label me-2">
                                 {"Max action count :"}
                             </label>
                             <input
                                 type="number"
                                 name="maxCount"
                                 style={{ width: '40px' }}
-                                className="text-center py-1 pr-4"
+                                className="text-center py-1 pr-4 me-4"
                                 value={maxCount}
                                 onChange={(e) => setMaxCount(e.target.value)}
                                 onKeyDown={(e) => handlePress(e)}
+                            />
+
+                            <label className="form-label me-2">
+                                {"Interaction count per 5days :"}
+                            </label>
+                            <input
+                                type="number"
+                                name="maxCount2"
+                                style={{ width: '40px' }}
+                                className="text-center py-1 pr-4"
+                                value={maxCount2}
+                                onChange={(e) => setMaxCount2(e.target.value)}
+                                onKeyDown={(e) => handlePress2(e)}
                             />
                         </div>
                     </div>

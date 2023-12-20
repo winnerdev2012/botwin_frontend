@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import ProductList from "./components/dashboard/ProductList"
 import AddChain from "./components/dashboard/AddChain";
+import EditChain from "./components/dashboard/EditChain";
 import AddAction from "./components/dashboard/AddAction";
 import Register from './components/auth/Register';
 import Login from './components/auth/Login';
@@ -20,6 +21,7 @@ function App() {
         <Route path="/products" element={<ProductList msg={msg} setMsg={setMsg} />} />
         <Route path="/addaction" element={<AddAction setMsg={setMsg} />} />
         <Route path="/managebridge" element={<BridgeManagement setMsg={setMsg} />} />
+        <Route path="/editchain" element={<EditChain setMsg={setMsg} />} />
         <Route path="/addchain" element={<AddChain setMsg={setMsg} />} />
         <Route path="/users" element={<Users />} />
       </Routes>
