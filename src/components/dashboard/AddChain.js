@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom'
+import { refreshToken, useLocalStorage } from '../utils'
 
 const AddChain = ({ setMsg }) => {
     const [chain_name, setChain_name] = useState('')
@@ -10,7 +11,6 @@ const AddChain = ({ setMsg }) => {
     
     useEffect(() => {
         refreshToken(setToken, setName, setExpire, navigate)
-        getChainList()
     }, [])
     const navigate = useNavigate()
     const saveProduct = async (e) => {

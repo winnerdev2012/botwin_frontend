@@ -234,9 +234,9 @@ const ProductList = ({ msg, setMsg }) => {
                             <button onClick={deleteChain} className="btn btn-danger me-2 mb-2">Delete This Chain</button>
                             <button
                                 onClick={handleClick}
-                                className={`btn ${!activechain ? 'btn-success' : 'btn-dark'} mb-2 me-2`}
+                                className={`btn ${activechain ? 'btn-success' : 'btn-dark'} mb-2 me-2`}
                             >
-                                {!activechain ? 'ASDAS' : 'WQEQWE'}
+                                {activechain ? 'Active' : 'Inactive'}
                             </button>
                             <label className="form-label me-2">
                                 {"Max action count :"}
