@@ -47,6 +47,10 @@ const ProductList = ({ msg, setMsg }) => {
         getActionListByChainId(currentChain)
     }, [currentScript])
 
+    useEffect(() => {
+        print(activechain)
+    }, [activechain])
+
     const handleClick = () => {
         setActiveChain(activechain === 1 ? 0 : 1);
         updateActiveChain(currentChain, activechain)
