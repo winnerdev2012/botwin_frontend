@@ -236,7 +236,7 @@ const ProductList = ({ msg, setMsg }) => {
                                 onClick={handleClick}
                                 className={`btn ${activechain ? 'btn-success' : 'btn-dark'} mb-2 me-2`}
                             >
-                                {activechain ? 'Active' : 'Inactive'}
+                                {activechain ? 'Active Inactive' : 'Inactive Active'}
                             </button>
                             <label className="form-label me-2">
                                 {"Max action count :"}
