@@ -47,10 +47,6 @@ const ProductList = ({ msg, setMsg }) => {
         getActionListByChainId(currentChain)
     }, [currentScript])
 
-    useEffect(() => {
-        print(activechain)
-    }, [activechain])
-
     const handleClick = () => {
         setActiveChain(activechain === 1 ? 0 : 1);
         updateActiveChain(currentChain, activechain)
@@ -240,7 +236,7 @@ const ProductList = ({ msg, setMsg }) => {
                                 onClick={handleClick}
                                 className={`btn ${!activechain ? 'btn-success' : 'btn-dark'} mb-2 me-2`}
                             >
-                                {!activechain ? 'Active' : 'Inactive'}
+                                {!activechain ? 'ASDAS' : 'WQEQWE'}
                             </button>
                             <label className="form-label me-2">
                                 {"Max action count :"}
