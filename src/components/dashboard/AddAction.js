@@ -7,7 +7,7 @@ const AddProduct = ({ setMsg }) => {
     const [actionName, setActionName] = useState('')
     const [actionUrl, setActionUrl] = useState('')
     const [actionWeight, setActionWeight] = useState(1)
-    const [action_type_int, setAction_type_int] = useState(1)
+    const [action_type_int, setAction_type_int] = useState(0)
     const [chain_list, setChain_list] = useState([])
     const [currentChain, setCurretChain] = useState(1)
     const [formError, setFormError] = useState('');
@@ -46,6 +46,8 @@ const AddProduct = ({ setMsg }) => {
             setAction_type_int(2);
         } else if (substring === "STAKE") {
             setAction_type_int(3);
+        } else if (substring === "LEND") {
+            setAction_type_int(4);
         } else {
             setAction_type_int(0);
         }
